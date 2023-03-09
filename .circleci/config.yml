@@ -48,7 +48,7 @@ jobs:
       # build project
       - run: 
           name: build project
-          command: gradlew clean assemble
+          command: ./gradlew clean assemble
 
 workflows:
   build-androidibrary-workflow:
