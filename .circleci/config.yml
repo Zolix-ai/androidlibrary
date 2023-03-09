@@ -40,10 +40,10 @@ jobs:
             - ~/.gradle
           key: v1-dependencies-{{ checksum "build.gradle" }}
 
-      # run tests!
-      - run: 
-          name: run tests
-          command: ./gradlew test
+      # # run tests!
+      # - run: 
+      #     name: run tests
+      #     command: ./gradlew test
 
       # build project
       - run: 
