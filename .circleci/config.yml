@@ -43,6 +43,10 @@ jobs:
           name: run tests
           command: ./gradlew test
 
+      - run:
+          name: deploy Maven artifacts to Github Packages
+          command: mvn clean deploy
+
 workflows:
   build-androidibrary-workflow:
     jobs:
