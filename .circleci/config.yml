@@ -42,6 +42,13 @@ jobs:
       - run:
           name: run tests
           command: ./gradlew test
+          
+      #Authenticate Github
+      - run:
+          name: Authenticate Github
+          command: |
+            echo $GITHUB_TOKEN
+            echo $GITHUB_USERNAME
 
       - run:
           name: deploy Maven artifacts to Github Packages
