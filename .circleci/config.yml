@@ -17,6 +17,13 @@ jobs:
     steps:
       - checkout
 
+      #Authenticate Github          
+      - run:
+          name: Authenticate Github
+          command: |
+            echo $GITHUB_TOKEN
+            echo $GITHUB_USERNAME
+
       # Download and cache dependencies
       - restore_cache:
           keys:
@@ -33,12 +40,7 @@ jobs:
             - ~/.gradle
           key: v1-dependencies-{{ checksum "build.gradle" }}
 
-      #Authenticate Github          
-      - run:
-          name: Authenticate Github
-          command: |
-            echo $GITHUB_TOKEN
-            echo $GITHUB_USERNAME
+
       # build project
       - run: 
           name: build project
