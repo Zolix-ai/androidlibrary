@@ -71,7 +71,7 @@ jobs:
 #Runnning the UI test by manually creating an AVD and running
       executor:
         name: android/android-machine
-        resource-class: large
+        resource-class: xlarge
         tag: 2021.10.1
       
       steps:
@@ -79,7 +79,7 @@ jobs:
         #Creates an AVD called avd
         - android/create-avd:
             avd-name: avd
-            system-image : system-images;android-32;default;x86
+            system-image : system-images;android-30;default;x86
             install: true
 
         - android/start-emulator:
@@ -89,6 +89,11 @@ jobs:
             wait-for-emulator: true
       # Runs "./gradlew connectedDebugAndroidTest" by default.
       # Specify the "test-command" parameter to customize the command run.
+
+      # Navigate to the android folder so you wont get the error "Task 'assembleDebugAndroidTest' not found in root project 'project'."
+        - run:
+            command: cd android
+
         - android/run-tests
         - android/save-gradle-cache:
             cache-prefix: v1a
@@ -99,7 +104,7 @@ jobs:
 workflows:
   build-androidibrary-and-test-workflow:
     jobs:
-      - build-androidlibrary
+    #  - build-androidlibrary
       - run-test-on-emulator
       # - android/run-ui-tests:
       #     system-image: system-images;android-29;default;x86
