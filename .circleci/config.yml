@@ -50,12 +50,12 @@ jobs:
       - run:
           name: deploy Maven artifacts to Github Packages
           command: mvn clean deploy
-
   #Run test Job        
-  run-test-on-emulator:
-
-      machine:
-        image: android-default
+  run-test-on-emulator:      
+      executor:
+        name: android/android-machine
+        resource-class: large
+        tag: "tests-tag"
       
       steps:
         - checkout
@@ -64,7 +64,6 @@ jobs:
             avd-name: avd
             system-image : system-images;android-29;default;x86
             install: true
-
 
         - android/start-emulator:
             avd-name: avd
@@ -84,3 +83,5 @@ workflows:
     jobs:
       - build-androidlibrary
       - run-test-on-emulator
+      # - android/run-ui-tests:
+      #     system-image: system-images;android-29;default;x86
