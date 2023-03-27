@@ -68,7 +68,7 @@ jobs:
 
 #Runnning the UI test by manually creating an AVD and running
       executor:
-        name: android/android-machine
+        name: android/android-docker
         resource-class: large
         tag: 2023.02.1
    
@@ -76,23 +76,27 @@ jobs:
       steps:
         - checkout
         #Creates an AVD called avd
-        # - android/create-avd:
-        #     avd-name: avd
-        #     system-image : system-images;android-33;google_apis;x86_64
-        #     install: true
+        - android/create-avd:
+            avd-name: avd
+            system-image : system-images;android-33;google_apis;x86_64
+            install: true
 
-        # - android/start-emulator:
-        #     avd-name: avd
-        #     no-window: true
-        #     restore-gradle-cache-prefix: v1a
-        #     wait-for-emulator: true
+        - android/start-emulator:
+            avd-name: avd
+            no-window: true
+            restore-gradle-cache-prefix: v1a
+            wait-for-emulator: true
 
       # Runs "./gradlew connectedDebugAndroidTest" by default.
       # Specify the "test-command" parameter to customize the command run. 
-        - android/start-emulator-and-run-tests
+       # - android/start-emulator-and-run-tests
        # - android/run-tests
-        # - android/save-gradle-cache:
-        #     cache-prefix: v1a
+        - run: sdkmanger --list
+        - run:
+            name: run tests manually
+            command: ./gradlew test
+        - android/save-gradle-cache:
+            cache-prefix: v1a
 
 
 
