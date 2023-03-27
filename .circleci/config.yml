@@ -71,15 +71,15 @@ jobs:
 #Runnning the UI test by manually creating an AVD and running
       executor:
         name: android/android-machine
-        resource-class: xlarge
-        tag: 2021.10.1
+        resource-class: large
+        tag: 2023.02.1
       
       steps:
         - checkout
         #Creates an AVD called avd
         - android/create-avd:
             avd-name: avd
-            system-image : system-images;android-30;default;x86
+            system-image : system-images;android-33;google_apis;x86_64
             install: true
 
         - android/start-emulator:
