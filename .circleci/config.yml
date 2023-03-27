@@ -79,7 +79,7 @@ jobs:
         - android/create-avd:
             avd-name: avd
            # system-image : system-images;android-33;google_apis;x86_64
-            system-image: system-images;android-30;google_apis;x86
+            system-image: system-images;android-31;google_apis;x86
             install: true
 
         - android/start-emulator:
