@@ -17,13 +17,6 @@ jobs:
     steps:
       - checkout
 
-      #Authenticate Github          
-      - run:
-          name: Authenticate Github
-          command: |
-            echo $GITHUB_TOKEN
-            echo $GITHUB_USERNAME
-
       # Download and cache dependencies
       - restore_cache:
           keys:
