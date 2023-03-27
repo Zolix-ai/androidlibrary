@@ -71,7 +71,9 @@ jobs:
         name: android/android-machine
         resource-class: large
         tag: 2023.02.1
-      
+        
+      working_directory: ~/android
+
       steps:
         - checkout
         #Creates an AVD called avd
