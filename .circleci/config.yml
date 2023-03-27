@@ -2,6 +2,10 @@
 # See: https://circleci.com/docs/2.0/language-java/
 version: 2.1
 
+orbs:
+  android: circleci/android@2.2.0
+
+
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
@@ -47,7 +51,36 @@ jobs:
           name: deploy Maven artifacts to Github Packages
           command: mvn clean deploy
 
+  #Run test Job        
+  run-test-on-emulator:
+
+      machine:
+        image: android-default
+      
+      steps:
+        - checkout
+        #Creates an AVD called avd
+        - android/create-avd:
+            avd-name: avd
+            system-image : system-images;android-29;default;x86
+            install: true
+
+
+        - android/start-emulator:
+            avd-name: avd
+            no-window: true
+            restore-gradle-cache-prefix: v1a
+      # Runs "./gradlew connectedDebugAndroidTest" by default.
+      # Specify the "test-command" parameter to customize the command run.
+        - android/run-tests
+        - android/save-gradle-cache:
+            cache-prefix: v1a
+
+
+    
+
 workflows:
-  build-androidibrary-workflow:
+  build-androidibrary-and-test-workflow:
     jobs:
       - build-androidlibrary
+      - run-test-on-emulator
