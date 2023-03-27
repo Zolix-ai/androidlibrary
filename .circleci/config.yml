@@ -68,9 +68,9 @@ jobs:
 
 #Runnning the UI test by manually creating an AVD and running
       executor:
-        name: android/android-docker
+        name: android/android-machine
         resource-class: large
-        tag: 2023.02.1
+        tag: 2021.10.1
    
 
       steps:
