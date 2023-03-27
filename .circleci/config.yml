@@ -79,7 +79,7 @@ jobs:
         #Creates an AVD called avd
         - android/create-avd:
             avd-name: avd
-            system-image : system-images;android-29;default;x86
+            system-image : system-images;android-32;default;x86
             install: true
 
         - android/start-emulator:
