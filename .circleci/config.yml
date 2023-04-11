@@ -6,23 +6,18 @@ version: 2.1
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
   build-and-test-androidlibrary:
-    # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
-    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
-    
+  
     machine:
       image: android:202102-01
     resource_class: large  
       
-
-    # Add steps to the job
-    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
       - checkout
       # Create Android Virtual Device
       - run:
           name: create AVD
           command: |
-            SYSTEM_IMAGES = "system-images;android-29;default;x86"
+            SYSTEM_IMAGES="system-images;android-29;default;x86"
             sdkmanager "$SYSTEM_IMAGES"
             echo "no" | avdmanager --verbose create avd -n test -k "$SYSTEM_IMAGES"
       - run:
@@ -52,8 +47,8 @@ jobs:
 
       # Run intergration tests
       - run:
-          name: Run assembleDebugAndroidTest task
-          command: ./gradlew assembleDebugAndroidTest
+          name: Run connectedAndroidTest task
+          command: ./gradlew connectedAndroidTest
 
       # Wait for emulator to start
       - run:
@@ -95,10 +90,10 @@ jobs:
             - ~/.gradle/caches
             - ~/.gradle/wrapper
 
-      # build project
-      - run: 
-          name: build project
-          command: ./gradlew clean assemble
+      # # build project
+      # - run: 
+      #     name: build project
+      #     command: ./gradlew clean assemble
 
       # # run tests
       # - run:
